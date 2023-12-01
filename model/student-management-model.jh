@@ -1,0 +1,67 @@
+entity Student {
+    firstName String required maxlength(50)
+    lastName String required maxlength(50)
+    middleNames String maxlength(100)
+    gender Gender required
+    dateOfBirth LocalDate required
+}
+
+entity Educator {
+    firstName String required
+    lastName String required
+    gender Gender required
+    profileImage ImageBlob
+    email String required
+}
+
+entity Grade {
+    name String required
+    description TextBlob required
+}
+
+entity Guardian {
+    firstName String required maxlength(50)
+    lastName String required maxlength(50)
+    gender Gender required
+    profession String
+}
+
+entity Address {
+    streetAddress String required
+    suburb String required
+    city String required
+    zipCode String required maxlength(10)
+    phone String required
+}
+
+enum Gender {
+    MALE,
+    FEMALE
+}
+
+entity Country {
+    countryName String required
+}
+
+entity Province {
+    provinceName String required
+}
+
+relationship OneToOne {
+    Student{user(login) required} to User
+    Educator{user(login) required} to User
+}
+
+relationship ManyToMany {
+    Student{guardians(lastName)} to Guardian{students(lastName)}
+    Educator to Grade
+}
+
+relationship OneToMany {
+    Country to Address{country}
+    Province to Address{province}
+    Grade to Student{grade(name)}
+}
+
+paginate all with pagination
+service all with serviceImpl

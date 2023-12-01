@@ -1,0 +1,41 @@
+{
+  "applications": "*",
+  "changelogDate": "20231201111919",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "grade",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Grade",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "student",
+      "otherEntityRelationshipName": "grade",
+      "relationshipName": "student",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "educator",
+      "otherEntityRelationshipName": "grade",
+      "ownerSide": false,
+      "relationshipName": "educator",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

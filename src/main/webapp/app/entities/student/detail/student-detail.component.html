@@ -1,0 +1,65 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="student">
+      <h2 data-cy="studentDetailsHeading"><span>Student</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ student.id }}</span>
+        </dd>
+        <dt><span>First Name</span></dt>
+        <dd>
+          <span>{{ student.firstName }}</span>
+        </dd>
+        <dt><span>Last Name</span></dt>
+        <dd>
+          <span>{{ student.lastName }}</span>
+        </dd>
+        <dt><span>Middle Names</span></dt>
+        <dd>
+          <span>{{ student.middleNames }}</span>
+        </dd>
+        <dt><span>Gender</span></dt>
+        <dd>
+          <span>{{ student.gender }}</span>
+        </dd>
+        <dt><span>Date Of Birth</span></dt>
+        <dd>
+          <span>{{ student.dateOfBirth | formatMediumDate }}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+          <span>{{ student.user?.login }}</span>
+        </dd>
+        <dt><span>Guardians</span></dt>
+        <dd>
+          <span *ngFor="let guardians of student.guardians; let last = last">
+            <a [routerLink]="['/guardian', guardians.id, 'view']">{{ guardians.lastName }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span>Grade</span></dt>
+        <dd>
+          <div *ngIf="student.grade">
+            <a [routerLink]="['/grade', student.grade.id, 'view']">{{ student.grade.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/student', student.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

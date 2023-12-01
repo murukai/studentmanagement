@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="address">
+      <h2 data-cy="addressDetailsHeading"><span>Address</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ address.id }}</span>
+        </dd>
+        <dt><span>Street Address</span></dt>
+        <dd>
+          <span>{{ address.streetAddress }}</span>
+        </dd>
+        <dt><span>Suburb</span></dt>
+        <dd>
+          <span>{{ address.suburb }}</span>
+        </dd>
+        <dt><span>City</span></dt>
+        <dd>
+          <span>{{ address.city }}</span>
+        </dd>
+        <dt><span>Zip Code</span></dt>
+        <dd>
+          <span>{{ address.zipCode }}</span>
+        </dd>
+        <dt><span>Phone</span></dt>
+        <dd>
+          <span>{{ address.phone }}</span>
+        </dd>
+        <dt><span>Country</span></dt>
+        <dd>
+          <div *ngIf="address.country">
+            <a [routerLink]="['/country', address.country.id, 'view']">{{ address.country.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Province</span></dt>
+        <dd>
+          <div *ngIf="address.province">
+            <a [routerLink]="['/province', address.province.id, 'view']">{{ address.province.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/address', address.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
